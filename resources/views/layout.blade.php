@@ -20,14 +20,14 @@
 <body>
     <header class="flex justify-center items-center px-24 py-8 bg-gray-900">
         <a class="mr-auto" href="{{ route('home.index') }}">
-            <ion-icon class="size-16 text-orange-500" name="cloud-upload-outline"></ion-icon>
+            <ion-icon class="size-10 md:size-16 text-orange-500" name="cloud-upload-outline"></ion-icon>
         </a>
         <nav>
             <ul>
                 <li>
                     <a class="text-gray-50 size-6 hover:text-orange-500 transition-all duration-300"
                         href="{{ route('gallery.index') }}">
-                        <ion-icon class="size-16 text-orange-500" name="image-outline"></ion-icon>
+                        <ion-icon class="size-10 md:size-16 text-orange-500" name="image-outline"></ion-icon>
                     </a>
                 </li>
             </ul>

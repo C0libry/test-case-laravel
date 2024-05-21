@@ -20,7 +20,7 @@
             </form>
         </div>
         <div class="flex justify-center">
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-4/5 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-4/5 py-10">
                 @foreach ($images as $image)
                     <div class="h-full max-w-full">
                         <a href="{{ $image->path }}"><img class="h-5/6 w-full rounded-t-lg hover:"
@@ -30,7 +30,8 @@
                             <div class="w-1/2 text-center break-words">
                                 {{ $image->name }}</div>
                             <a class="w-1/4 text-center" href="{{ route('image.download', $image->id) }}">
-                                <ion-icon class="size-8" name="cloud-download-outline"></ion-icon>
+                                <ion-icon class=" size-5 md:size-8 hover:text-orange-500"
+                                    name="cloud-download-outline"></ion-icon>
                             </a>
                         </div>
                     </div>

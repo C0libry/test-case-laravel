@@ -26,7 +26,6 @@
         </div>
 
         <div id="images-list" class="flex items-center justify-center flex-col md:flex-row gap-3">
-            <div class="h-32 w-32 hidden"></div>
         </div>
 
         <button id="upload-btn" type="submit"
