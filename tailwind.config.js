@@ -7,7 +7,11 @@ export default {
         './public/**/*.js',
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                accent: '#f97316',
+            },
+        },
     },
     plugins: [],
 }
