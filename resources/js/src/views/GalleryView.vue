@@ -4,17 +4,6 @@ import { useFetch } from '@vueuse/core' // https://vueuse.org/core/useFetch/
 import { TailwindPagination } from 'laravel-vue-pagination'
 import { format } from 'date-fns'
 
-const imageId = ref<number>(0)
-
-const downloadUrl = computed(() => {
-    return `http://${window.location.host}/api/V1/download/${imageId.value}`
-})
-
-const { execute: downloadImage, data: zip } = useFetch(downloadUrl, {
-    refetch: true,
-    immediate: false,
-}).post()
-
 const page = ref<number>(1)
 const sort = ref<string>('-created_at')
 const queryUrl = computed(() => {
@@ -22,17 +11,12 @@ const queryUrl = computed(() => {
 })
 
 const {
-    // execute: loadGallery,
     isFetching,
     error,
     data: imagesData,
-} = useFetch(queryUrl, { refetch: true }).get().json() // immediate: false
+} = useFetch(queryUrl, { refetch: true }).get().json()
 
 const setPage = (newPage: number) => (page.value = newPage)
-
-// onMounted(() => {
-//     loadGallery()
-// })
 </script>
 <template>
     <div class="flex justify-center items-center flex-col">
@@ -87,7 +71,10 @@ const setPage = (newPage: number) => (page.value = newPage)
                         <div class="w-1/2 text-center break-words text-active">
                             {{ image.name }}
                         </div>
-                        <a class="w-1/4 text-center" href="/api/V1/download/1">
+                        <a
+                            class="w-1/4 text-center"
+                            :href="`/api/V1/download/image/${image.id}`"
+                        >
                             <ion-icon
                                 class="size-5 md:size-8 hover:text-orange-500"
                                 name="cloud-download-outline"
