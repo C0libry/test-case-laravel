@@ -7,4 +7,6 @@ use App\Http\Controllers\Api\V1\ImageController;
 Route::prefix('V1')->group(function () {
     Route::get('/getImagesInfo', [ImageController::class, 'getImagesInfo']);
     Route::get('/findImage/{id}', [ImageController::class, 'findImage']);
+    Route::post('/uploadImages', [ImageController::class, 'create']);
+    Route::get('/download/image/{imageId}', [ImageController::class, 'download']);
 });
