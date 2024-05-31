@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useFetch } from '@vueuse/core'
 import FilesUpload from '../components/FilesUpload.vue'
@@ -8,14 +8,18 @@ const router = useRouter()
 
 let maxFilesQuantity: number = 5
 let fileTypes: Array<string> = ['image/jpeg', 'image/png']
-let imagesForUpload: Array<File> = []
-let links = ref<Array<string>>([])
+
+const imagesForUpload = ref<Array<File>>([])
+const links = ref<Array<string>>([])
+const isActive = computed(() => imagesForUpload.value.length > 0)
+
+console.log(isActive.value)
 
 function saveImages() {
     const queryUrl: string = `http://${window.location.host}/api/V1/upload/images`
     const formData: FormData = new FormData()
     formData.append('_method', 'POST')
-    imagesForUpload.forEach((image) => {
+    imagesForUpload.value.forEach((image) => {
         formData.append('images[]', image)
     })
 
@@ -40,11 +44,12 @@ function saveImages() {
 
 function onChange(e) {
     e.forEach((image) => {
-        if (imagesForUpload.length < maxFilesQuantity) {
-            imagesForUpload.push(image)
+        if (imagesForUpload.value.length < maxFilesQuantity) {
+            imagesForUpload.value.push(image)
             links.value.push(URL.createObjectURL(image))
         }
     })
+    console.log(isActive.value)
 }
 </script>
 <template>
@@ -73,9 +78,10 @@ function onChange(e) {
 
         <button
             id="upload-btn"
-            :disabled="imagesForUpload.length === 0"
+            :disabled="!isActive"
             type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="text-white bg-accent hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-orange-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+            :class="{ 'cursor-not-allowed': !isActive, grayscale: !isActive }"
         >
             Sabmit
         </button>
