@@ -5,9 +5,10 @@ import { TailwindPagination } from 'laravel-vue-pagination'
 import { format } from 'date-fns'
 
 const page = ref<number>(1)
-const sort = ref<string>('-created_at')
+const sort = ref<string>('created_at')
+const dir = ref<'asc' | 'desc'>('desc')
 const queryUrl = computed(() => {
-    return `http://${window.location.host}/api/V1/images?page=${page.value}&sort=${sort.value}`
+    return `http://${window.location.host}/api/V1/images?page=${page.value}&sort=${sort.value}&dir=${dir.value}`
 })
 
 const {
@@ -21,25 +22,33 @@ const setPage = (newPage: number) => (page.value = newPage)
 <template>
     <div class="flex justify-center items-center flex-col">
         <div class="flex justify-center pt-10">
-            <form id="sort-form" method="GET" submit>
+            <div id="sort" class="flex gap-8" method="GET">
                 <select
                     ref="abc"
                     v-model="sort"
                     id="sort-selector"
                     name="sort"
-                    @change="setPage(1)"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    @change="page = 1"
+                    class="bg-gray-50 border border-gray-700 text-gray-900 mb-6 text-sm rounded-lg focus:ring-accent focus:border-accent block w-64 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 >
-                    <option value="-created_at">
-                        Sort by upload date. New first
-                    </option>
-                    <option value="created_at">
-                        Sort by upload date. Old first
-                    </option>
-                    <option value="name">Sort by name A-Z</option>
-                    <option value="-name">Sort by name Z-A</option>
+                    <option value="created_at">Sort by upload date</option>
+                    <option value="name">Sort by name</option>
                 </select>
-            </form>
+                <button
+                    v-if="dir === 'asc'"
+                    @click=";(dir = 'desc'), (page = 1)"
+                    class="dark:bg-gray-700 dark:text-white flex items-center justify-center text-xl h-10 w-10 rounded-lg border border-gray-700 focus:ring-accent focus:border-accent"
+                >
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </button>
+                <button
+                    v-else="dir === 'desc'"
+                    @click=";(dir = 'asc'), (page = 1)"
+                    class="dark:bg-gray-700 dark:text-white flex items-center justify-center text-xl h-10 w-10 rounded-lg border border-gray-700 focus:ring-accent focus:border-accent"
+                >
+                    <ion-icon name="chevron-up-outline"></ion-icon>
+                </button>
+            </div>
         </div>
         <div class="flex justify-center">
             <div

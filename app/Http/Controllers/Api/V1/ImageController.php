@@ -56,17 +56,13 @@ class ImageController extends Controller
     public function getImagesInfo(Request $request)
     {
         $request->validate([
-            "sort" => ['string', 'max:255'],
+            "sort" => ['required', 'string', 'max:255'],
+            "dir" => ['required', 'string', 'max:4'],
         ]);
 
-        $images = match ($request->sort) {
-            'created_at' => Image::orderBy('created_at', 'ASC')->paginate(6),
-            'name' => Image::orderBy('name')->paginate(6),
-            '-name' => Image::orderBy('name', 'DESC')->paginate(6),
-            default => Image::orderBy('created_at', 'DESC')->paginate(6),
-        };
+        $images = Image::orderBy($request->sort, $request->dir)->paginate(6);
 
-        $images->appends(['sort' => $request->sort])->links();
+        $images->appends(['sort' => $request->sort, 'dir' => $request->dir])->links();
 
         return response()->json(['success' => true, 'data' => $images]);
     }
