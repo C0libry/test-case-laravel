@@ -7,7 +7,7 @@ import { format } from 'date-fns'
 const page = ref<number>(1)
 const sort = ref<string>('-created_at')
 const queryUrl = computed(() => {
-    return `http://${window.location.host}/api/V1/getImagesInfo?page=${page.value}&sort=${sort.value}`
+    return `http://${window.location.host}/api/V1/images?page=${page.value}&sort=${sort.value}`
 })
 
 const {
@@ -47,18 +47,18 @@ const setPage = (newPage: number) => (page.value = newPage)
                 v-if="imagesData"
             >
                 <div
-                    class="h-full max-w-full"
+                    class="h-full max-w-full flex flex-col"
                     v-for="(image, index) in imagesData.data.data"
                     :key="index"
                 >
-                    <a :href="image.path"
-                        ><img
-                            class="h-5/6 w-full rounded-t-lg hover:"
+                    <a :href="image.path">
+                        <img
+                            class="w-full rounded-t-lg"
                             :src="image.path"
                             alt=""
                     /></a>
                     <div
-                        class="flex justify-between items-center h-1/6 w-full rounded-b-lg bg-gray-900 text-gray-50"
+                        class="flex justify-between items-center flex-grow py-4 w-full rounded-b-lg bg-gray-900 text-gray-50"
                     >
                         <div class="w-1/4 text-center">
                             {{
@@ -73,10 +73,10 @@ const setPage = (newPage: number) => (page.value = newPage)
                         </div>
                         <a
                             class="w-1/4 text-center"
-                            :href="`/api/V1/download/image/${image.id}`"
+                            :href="`/api/V1/download/images/${image.id}`"
                         >
                             <ion-icon
-                                class="size-5 md:size-8 hover:text-orange-500"
+                                class="size-5 md:size-8 hover:text-accent"
                                 name="cloud-download-outline"
                             ></ion-icon>
                         </a>
@@ -86,6 +86,12 @@ const setPage = (newPage: number) => (page.value = newPage)
         </div>
         <TailwindPagination
             class="pb-5"
+            :limit="1"
+            :activeClasses="[
+                'bg-orange-50',
+                'border-orange-500',
+                'text-orange-600',
+            ]"
             v-if="imagesData"
             :data="imagesData.data"
             @pagination-change-page="setPage"

@@ -12,20 +12,29 @@ let imagesForUpload: Array<File> = []
 let links = ref<Array<string>>([])
 
 function saveImages() {
-    const queryUrl: string = `http://${window.location.host}/api/V1/uploadImages`
+    const queryUrl: string = `http://${window.location.host}/api/V1/upload/images`
     const formData: FormData = new FormData()
     formData.append('_method', 'POST')
     imagesForUpload.forEach((image) => {
         formData.append('images[]', image)
     })
-    console.log('formData: ', formData)
 
-    const { isFetching, error, data } = useFetch(queryUrl, {
-        body: formData,
-    }).post()
-
-    router.push({
-        path: '/gallery',
+    const {
+        execute: uploadImages,
+        isFetching,
+        error,
+        data,
+    } = useFetch(
+        queryUrl,
+        {
+            body: formData,
+        },
+        { immediate: false }
+    ).post()
+    uploadImages().then((res) => {
+        router.push({
+            path: '/gallery',
+        })
     })
 }
 

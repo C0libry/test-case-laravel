@@ -7,7 +7,7 @@
     >
         <router-link to="/">
             <ion-icon
-                class="size-10 md:size-16 hover:text-orange-500 transition-all duration-300"
+                class="size-10 md:size-16 hover:text-accent transition-all duration-300"
                 name="cloud-upload-outline"
             ></ion-icon>
         </router-link>
@@ -16,7 +16,7 @@
                 <li>
                     <router-link to="/gallery">
                         <ion-icon
-                            class="size-10 md:size-16 hover:text-orange-500 transition-all duration-300"
+                            class="size-10 md:size-16 hover:text-accent transition-all duration-300"
                             name="image-outline"
                         ></ion-icon>
                     </router-link>

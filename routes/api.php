@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\ImageController;
 
 Route::prefix('V1')->group(function () {
-    Route::get('/getImagesInfo', [ImageController::class, 'getImagesInfo']);
-    Route::get('/findImage/{id}', [ImageController::class, 'findImage']);
-    Route::post('/uploadImages', [ImageController::class, 'create']);
-    Route::get('/download/image/{imageId}', [ImageController::class, 'download']);
+    Route::get('/images', [ImageController::class, 'getImagesInfo']);
+    Route::get('/images/{id}', [ImageController::class, 'findImage']);
+    Route::post('/upload/images/', [ImageController::class, 'create']);
+    Route::get('/download/images/{imageId}', [ImageController::class, 'download']);
 });

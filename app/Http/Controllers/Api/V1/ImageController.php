@@ -47,11 +47,10 @@ class ImageController extends Controller
 
         $zip->addFile($image->path, $image->name);
         $zip->close();
-        return response()->download($nameZip);
+        return response()->download($nameZip)->deleteFileAfterSend(true);
     }
     public function findImage($imageId)
     {
-
         return response()->json(['success' => true, 'data' => Image::find($imageId)]);
     }
     public function getImagesInfo(Request $request)
