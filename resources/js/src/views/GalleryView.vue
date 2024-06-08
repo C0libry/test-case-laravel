@@ -62,7 +62,7 @@ const setPage = (newPage: number) => (page.value = newPage)
                 >
                     <a :href="image.path">
                         <img
-                            class="w-full rounded-t-lg"
+                            class="w-full h-96 rounded-t-lg"
                             :src="image.path"
                             alt=""
                     /></a>
