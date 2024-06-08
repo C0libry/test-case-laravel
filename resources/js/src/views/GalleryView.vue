@@ -67,7 +67,7 @@ const setPage = (newPage: number) => (page.value = newPage)
                             alt=""
                     /></a>
                     <div
-                        class="flex justify-between items-center flex-grow py-4 w-full rounded-b-lg bg-gray-900 text-gray-50"
+                        class="flex justify-between items-center py-4 w-full rounded-b-lg bg-gray-900 text-gray-50"
                     >
                         <div class="w-1/4 text-center">
                             {{
