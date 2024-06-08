@@ -62,12 +62,12 @@ const setPage = (newPage: number) => (page.value = newPage)
                 >
                     <a :href="image.path">
                         <img
-                            class="w-full rounded-t-lg"
+                            class="w-full h-96 rounded-t-lg"
                             :src="image.path"
                             alt=""
                     /></a>
                     <div
-                        class="flex justify-between items-center flex-grow py-4 w-full rounded-b-lg bg-gray-900 text-gray-50"
+                        class="flex justify-between items-center py-4 w-full rounded-b-lg bg-gray-900 text-gray-50"
                     >
                         <div class="w-1/4 text-center">
                             {{
