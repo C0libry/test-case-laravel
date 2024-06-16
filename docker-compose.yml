@@ -15,10 +15,10 @@ services:
 
     laravel-app:
         image: bitnami/laravel:latest
-        container_name: test-case-laravel-temp
+        container_name: test-case-laravel
         ports:
-            - '8003:8000'
-            - '3003:3000'
+            - '8000:8000'
+            - '3000:3000'
         environment:
             - DB_HOST=mariadb
             - DB_PORT=3306

@@ -54,6 +54,6 @@ cp .env.example .env
 docker compose up -d
 ```
 
-### Open the website: [http://localhost:8003](http://localhost:8003)
+### Open the website: [http://localhost:8000](http://localhost:8000)
 
 You can change database password and website port in **docker-compose.yml** file.
