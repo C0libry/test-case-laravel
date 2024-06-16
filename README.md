@@ -1,8 +1,9 @@
-Это реализация тестового задания.
-В проекте я использовал Laravel и Vue.
+# Этот проект реализация тестового задания
+
+В проекте я использовал **Laravel** и **Vue**.
 Посмотреть можно по ссылке: http://31.128.39.132/
 
-Само тз:
+## Само тз:
 Разработать прототип хостинга изображений.
 Инструменты для реализации задания:
 - фреймворк Laravel/Yii2
@@ -28,3 +29,31 @@
 - получить данные о загруженном файле по id в json
 Код задания необходимо выложить на github/gitlab/bitbucket.
 Бонусом будет возможность просмотра результата в общем доступе (например vds)
+
+---
+
+# Installation
+
+### Step 1: Create a network
+``` bast
+docker network create laravel-network
+```
+
+### Step 2: Create a volume for MariaDB
+``` bast
+docker volume create --name mariadb_data
+```
+
+### Step 3:  Create .env file
+``` bast
+cp .env.example .env
+```
+
+### Step 4: Run project using docker compose
+``` bast
+docker compose up -d
+```
+
+### Open the website: [http://localhost:8003](http://localhost:8003)
+
+You can change database password and website port in **docker-compose.yml** file.
