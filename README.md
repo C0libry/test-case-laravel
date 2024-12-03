@@ -35,23 +35,27 @@
 # Installation
 
 ### Step 1: Create a network
-``` bast
+``` bash
 docker network create laravel-network
 ```
 
 ### Step 2: Create a volume for MariaDB
-``` bast
+``` bash
 docker volume create --name mariadb_data
 ```
 
 ### Step 3:  Create .env file
-``` bast
+``` bash
 cp .env.example .env
 ```
 
 ### Step 4: Run project using docker compose
-``` bast
+``` bash
 docker compose up -d
+```
+### Step 5: Apply migrations
+```bash
+docker exec test-case-laravel php artisan migrate
 ```
 
 ### Open the website: [http://localhost:8000](http://localhost:8000)
